@@ -6,3 +6,4 @@ The dataset reveals that a small handful of microbial species (also called opera
 Step 1: Plotly
 The D3 library was used to read the samples.json file and outputed to console to have a first hand view of the dataset.
 A bar chart with a dropdown menu was constructed in the code format to display the top 10 OTUs found in each selected individual. To achieve this sample_values data from the samples.json dataset was used as values for the bar chart.
+Also, the otu_ids data array was used to populate the labels for the bar chart, while the otu_labels data array was used for the hovertext chart information.
