@@ -1,7 +1,7 @@
 // Reading samples.json file with D3 library (Promise)
 const dataSource = d3.json('./../data/samples.json');
 // Viewing json file in console
-dataSource.then(dataset => {console.log(dataset)});
+//dataSource.then(dataset => {console.log(dataset)});
 
 // Creating multiple functions for horizontal bar chart with dropdown for top 10 OTUs per individual
 function makeChart(chosenSample){
@@ -19,10 +19,10 @@ function makeChart(chosenSample){
         }]
         let barLayout = {
             xaxis: {title: 'Sample Value'},
-            yaxis: {title: 'OTU ID Information'},
-            title: `Top 10 Operational Taxonomic Units (OTUs) for Test Subject ID No: ${chosenSample}`,
-            width: 600,
-            height: 450,
+            //yaxis: {title: 'OTU ID Information'},
+            title: `Top 10 (OTUs) for Test Subject ID No: ${chosenSample}`, font: {size: 12},
+            width: 400,
+            height: 650,
         }
         Plotly.newPlot('bar', barTrace, barLayout);
 
@@ -61,7 +61,7 @@ function init(){
 
         makeChart(nameOptions.names[0]);
         makeDemoInfo(nameOptions.names[0]);
-        makeChoice(nameOptions.names[0]) 
+        optionChanged(nameOptions.names[0]) 
     });
 }
 
@@ -81,7 +81,9 @@ function makeDemoInfo(chosenSample){
     });
 }
 
-function makeChoice(sample){
+
+
+function optionChanged(sample){
     makeChart(sample);
     makeDemoInfo(sample);
     
