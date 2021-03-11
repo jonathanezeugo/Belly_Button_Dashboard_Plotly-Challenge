@@ -1,5 +1,5 @@
 // Reading samples.json file with D3 library (Promise)
-const dataSource = d3.json('../data/samples.json');
+const dataSource = d3.json('../../data/samples.json');
 //data\samples.json
 // Viewing json file in console
 dataSource.then(dataset => {console.log(dataset)});
