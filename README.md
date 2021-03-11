@@ -12,3 +12,4 @@ A bar chart with a dropdown menu was constructed in the code format to display t
 Also, the otu_ids data array was used to populate the labels for the bar chart, while the otu_labels data array was used for the hovertext chart information.
 Bubble Chart:
 A bubble chart was displayed on the dashboard to represent the selected OTU id, the bubble size represented the data point magnitude and associated colors obtained from the otu_ids data array. 
+Step 2: (Optional)
