@@ -75,7 +75,7 @@ function makeChart(chosenSample){
             width: 400,
             margin: {t: 170, b: 0}
         };
-
+        // Plot dial gauge
         Plotly.newPlot('gauge', dialTrace, dialLayout)
     });
 });

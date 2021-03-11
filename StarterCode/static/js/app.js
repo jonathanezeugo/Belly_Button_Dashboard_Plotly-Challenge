@@ -1,6 +1,6 @@
 // Reading samples.json file with D3 library (Promise)
-const dataSource = d3.json('../../samples.json');
-//data\samples.json
+const dataSource = d3.json('./../../data/samples.json');
+
 // Viewing json file in console
 dataSource.then(dataset => {console.log(dataset)});
 
@@ -25,8 +25,10 @@ function makeChart(chosenSample){
             width: 400,
             height: 650,
         }
+        // Plot bar chart
         Plotly.newPlot('bar', barTrace, barLayout);
 
+        // Build bubble chart
         let bublTrace = [{
             x: sampleArr.otu_ids,
             y: sampleArr.sample_values,
@@ -44,20 +46,19 @@ function makeChart(chosenSample){
             height: 600,
             width: 1000
         }
+        // Plot bubble chart
         Plotly.newPlot('bubble', bublTrace, bublLayout);
     });
 }
 
+// Creating initializing function 
 function init(){
     dataSource.then(nameOptions => {
         nameOptions.names.forEach(nameOption => {
             d3.select('#selDataset')
                 .append('option')
                 .text(nameOption)
-                .property('value', nameOption);
-        // makeChart(nameOptions.names[0]);
-        // makeDemoInfo(nameOptions.names[0]);
-        // makeChoice(nameOptions.names[0])        
+                .property('value', nameOption);   
         });
 
         makeChart(nameOptions.names[0]);
@@ -66,6 +67,7 @@ function init(){
     });
 }
 
+// Creating a function for the dropdown options
 function makeDemoInfo(chosenSample){
     dataSource.then(sampMetaData => {
         let metaDataInfo = sampMetaData.metadata.filter(sampleObj => sampleObj.id.toString() === chosenSample)[0];
@@ -76,32 +78,17 @@ function makeDemoInfo(chosenSample){
         sampleMetadataPanel.html("");
         Object.entries(metaDataInfo).forEach(([key, value]) => {
             sampleMetadataPanel
-            .append('p').text(`${key}: ${value}`);
-            //.append('h3').text(`${key}: ${value}`);
+            .append('p').text(`${key}: ${value}`);            
         });
     });
 }
 
-
-
+// Creating a function to handle options change
 function optionChanged(sample){
     makeChart(sample);
     makeDemoInfo(sample);
     
 }
+
+// Initializing function
 init();
-//forStarts();
-// }
-
-// d3.json(dataSource).then((sourceData) => {
-//     // Preliminary logging to console for confirmation
-//     console.log(sourceData);
-// });
-
-// function pullData(data) {
-//     console.log(data);
-// };
-// Importing json file
-// d3.json('../data/samples.json', function(data){
-//     console.log(data);
-// })
