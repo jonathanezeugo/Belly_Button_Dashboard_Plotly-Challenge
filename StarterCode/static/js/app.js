@@ -1,7 +1,7 @@
 // Reading samples.json file with D3 library (Promise)
 const dataSource = d3.json('./../data/samples.json');
 // Viewing json file in console
-//dataSource.then(dataset => {console.log(dataset)});
+dataSource.then(dataset => {console.log(dataset)});
 
 // Creating multiple functions for horizontal bar chart with dropdown for top 10 OTUs per individual
 function makeChart(chosenSample){

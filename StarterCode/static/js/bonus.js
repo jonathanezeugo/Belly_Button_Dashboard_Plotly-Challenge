@@ -1,8 +1,4 @@
-// Reading samples.json file with D3 library (Promise)
-//const dataSource = d3.json('../data/samples.json');
-// Viewing json file in console
-//dataSource.then(dataset => {console.log(dataset)});
-//console.log(dataSource);
+
 // Creating multiple functions for horizontal bar chart with dropdown for top 10 OTUs per individual
 function makeChart(chosenSample){
     dataSource.then(data => {
@@ -26,6 +22,8 @@ function makeChart(chosenSample){
         }
         Plotly.newPlot('bar', barTrace, barLayout);
 
+
+        // Bubble Chart Build
         let bublTrace = [{
             x: sampleArr.otu_ids,
             y: sampleArr.sample_values,
@@ -46,7 +44,7 @@ function makeChart(chosenSample){
         Plotly.newPlot('bubble', bublTrace, bublLayout);
 
 
-        // Dial Gauge
+        // Dial Gauge Build
         dataSource.then(objMetaData => {
             let metaDataInfo = objMetaData.metadata.filter(sampleObj => sampleObj.id.toString() === chosenSample)[0];
                 dialValue = metaDataInfo.wfreq;
@@ -83,16 +81,14 @@ function makeChart(chosenSample){
 });
 };
 
+// Creating initializing function
 function init(){
     dataSource.then(nameOptions => {
         nameOptions.names.forEach(nameOption => {
             d3.select('#selDataset')
                 .append('option')
                 .text(nameOption)
-                .property('value', nameOption);
-        // makeChart(nameOptions.names[0]);
-        // makeDemoInfo(nameOptions.names[0]);
-        // makeChoice(nameOptions.names[0])        
+                .property('value', nameOption);      
         });
 
         makeChart(nameOptions.names[0]);
@@ -101,27 +97,28 @@ function init(){
     });
 };
 
+// Creating a function for the dropdown options
 function makeDemoInfo(chosenSample){
     dataSource.then(sampMetaData => {
         let metaDataInfo = sampMetaData.metadata.filter(sampleObj => sampleObj.id.toString() === chosenSample)[0];
 
-        let sampleMetadataPanel = d3.select('#sample-metadata');//.html("");
+        let sampleMetadataPanel = d3.select('#sample-metadata');
 
-        // resetting
+        // resetting the box
         sampleMetadataPanel.html("");
         Object.entries(metaDataInfo).forEach(([key, value]) => {
             sampleMetadataPanel
             .append('p').text(`${key}: ${value}`);
-            //.append('h3').text(`${key}: ${value}`);
         });
     });
 };
 
+// Creating a function to handle options change
 function optionChanged(sample){
     makeChart(sample);
     makeDemoInfo(sample);
     
 };
 
-init()
-;
+// Initializing function
+init();
